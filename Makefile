@@ -6,11 +6,21 @@ all: tigmint-slides.html
 clean:
 	rm -f tigmint-slides.html
 
+deploy: index.html
+	git checkout -B gh-pages
+	git add index.html
+	git commit -m 'Render index.html'
+	git push --force
+	git checkout master
+
 install-deps:
 	brew install pandoc
 
 %.html: %.md reveal.js/js/reveal.js
 	pandoc -st revealjs -V theme:sky -o $@ $<
+
+index.html: tigmint-slides.html
+	cp $< $@
 
 revealjs-3.5.0.tar.gz:
 	curl -L -o $@ https://github.com/hakimel/reveal.js/archive/3.5.0.tar.gz
