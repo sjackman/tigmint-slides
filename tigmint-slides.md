@@ -34,19 +34,44 @@ ISMB HiTSeq 2017-07-24&mdash;25
 [github.com/sjackman]: https://github.com/sjackman
 [sjackman.ca]: http://sjackman.ca
 
-10x Genomics Chromium
+Linked Reads
 ================================================================================
 
-## Utility of large molecules and linked reads
+## Linked reads
 
-+ One library rather than two: \
-  Illumina paired-end and mate-pair
++ Large molecules are isolated in partitions
++ Each partition has its own barcode
++ Reads from the same molecule share the same barcode
++ Large molecules including 100 kbp and up
 
 ----------------------------------------
 
 ![10x Genomics Chromium Linked Reads <http://www.10xgenomics.com/assembly/>](images/10xgenomics.png)
 
-## Scaffolding with ARCS
+## Utility of large molecules and linked reads
+
++ One linked-read library rather than paired-end and mate-pair libraries
++ One nanogram of DNA with 10x Genomics Chromium
+
+### Alignment
+
++ Identify structural variants
++ Phase variants across large haplotype blocks
+
+### Assembly
+
++ Scaffold over sequencing gaps and repeats
++ Identify and correct misassemblies
+
+## Scaffold with ARCS
+
++ Map the reads to the assembly
++ Identify scaffold ends that share common barcodes
++ Construct a graph where each edge joins two scaffold ends
++ Merge unambiguous paths through this graph
+
+ARCS: Assembly Roundup by Chromium Scaffolding
+bioRxiv: <https://doi.org/10.1101/100750>
 
 ----------------------------------------
 
@@ -54,25 +79,66 @@ ISMB HiTSeq 2017-07-24&mdash;25
 
 ## Misassemblies limit scaffold contiguity
 
-for highly contiguous assemblies
+Contigs come to an end due to...
+
++ repeats
++ sequencing gaps
++ misassemblies
+
+Most scaffolding algorithms address repeats and gaps, but not misassemblies.
+
+For highly contiguous assemblies, misassemblies limit scaffold contiguity.
+
+Tigmint
+================================================================================
 
 ## Tigmint
 
++ Construct a graph of segments sharing common barcodes
++ Count molecules supporting each position
++ Plot molecule coverage metrics
++ Identify and correct misassemblies
+
+----------------------------------------
+
+![Graph of scaffold segments](images/segments-graph.png)
+
 ## Visualization
 
-+ sequence segment graph
-+ physical molecule coverage
-+ molecule start and end scatter plot
++ Graph of scaffold segments
++ Molecule start and end scatter plot
++ Physical molecule coverage
++ Histogram of clipped read alignments at molecule ends
+
+----------------------------------------
+
+![500 kbp scaffold with three misassemblies](images/breakpoints.png)
 
 ## Identifying and fixing misassemblies
+
++ Regions with poor molecule coverage are suspect
++ Depth less than the median minus two times the IQR
++ Refine misassembly coordinates with base-pair accuracy
+  using clipped read alignments at molecule ends
 
 ## Menagerie of Misassemblies
 
 + Missing sequence (deletion)
-+ Inversion
-+ Chimeric sequence
++ Chimeric fusion
++ Chimeric insertion
 + Collapsed repeat
-+ Insertion
++ Inversion
+
+----------------------------------------
+
+![Misassembled repeat](images/4005:193000-200000.png)
+
+----------------------------------------
+
+![Chimeric fusion](images/4003:260000-300000.png)
+
+Sitka Spruce Mitochondrion
+================================================================================
 
 ## Genome Skimming
 
@@ -87,9 +153,6 @@ Assemble the 6 Mbp Sitka spruce mitochondrion
 ----------------------------------------
 
 ![White spruce depth vs percent GC](images/picea-glauca-depth-gc.png)
-
-Sitka Spruce Mitochondrion
-================================================================================
 
 ## Aim
 
@@ -106,13 +169,13 @@ Assemble the Sitka spruce mitochondrion into a single scaffold\* using 10x Chrom
 
 ## Results
 
-+ Largest scaffold is 1.2 Mbp
-+ 50% of the 6 Mbp genome in 4 scaffolds > 460 kbp
-+ 75% of the genome in 13 scaffolds > 100 kbp
++ Assembled the 124 kbp plastid in a single contig
++ Assembled the 6 Mbp mitochondrion in 4 scaffolds
++ Largest scaffold is 4 Mbp
++ 1/283 or 0.35% of reads are plastid
 + 1/223 or 0.45% of reads are mitochondrial
 + 115 ORFs with similarity to known mitochondrial genes
 + 1,154 other ORFS ≥ 300 bp
-+ 9 Type II introns in 6 genes
 
 ----------------------------------------
 
@@ -162,7 +225,7 @@ fin
 [RNAweasel]: http://megasun.bch.umontreal.ca/RNAweasel/
 [Sealer]: https://github.com/bcgsc/abyss/tree/master/Sealer
 [Supernova]: http://support.10xgenomics.com/de-novo-assembly/software/overview/welcome
-[Tigmint]: https://github.com/bcgsc/tigmint
+[Tigmint]: https://github.com/sjackman/tigmint-data
 
 Supplementary Slides
 ================================================================================
