@@ -39,95 +39,117 @@ Linked Reads
 
 ## Linked reads
 
-+ Large molecules are isolated in partitions
++ Large molecules of DNA are isolated in partitions
++ Construct barcoded reads from HMW DNA
 + Each partition has its own barcode
-+ Reads from the same molecule share the same barcode
-+ Large molecules including 100 kbp and up
++ Reads from the same molecule \
+  share the same barcode
++ Large molecules include 100 kbp and up
++ One nanogram of input DNA \
+  with 10x Genomics Chromium
 
 ----------------------------------------
 
 ![10x Genomics Chromium Linked Reads <http://www.10xgenomics.com/assembly/>](images/10xgenomics.png)
 
-## Utility of large molecules and linked reads
+# Utility of large molecules and linked reads
 
-+ One linked-read library rather than paired-end and mate-pair libraries
-+ One nanogram of DNA with 10x Genomics Chromium
-
-### Alignment
+## Utility to Alignment
 
 + Identify structural variants
 + Phase variants across large haplotype blocks
++ Map reads to large repeats and resolve ambiguous alignments (MAPQ=0)
 
-### Assembly
+## Utility to Assembly
 
-+ Scaffold over sequencing gaps and repeats
-+ Identify and correct misassemblies
++ One linked-read library rather than paired-end and mate-pair libraries
++ Resolve repeats with local assembly, \
+  similar to phasing alleles
++ **Scaffold** over unresolved repeats
++ **Scaffold** over coverages gaps in sequencing \
+  caused by for example GC bias
++ **Identify and correct misassemblies**
+
+# ARCS
 
 ## Scaffold with ARCS
 
 + Map the reads to the assembly
-+ Identify scaffold ends that share common barcodes
-+ Construct a graph where each edge joins two scaffold ends
++ Identify scaffold ends sharing common barcodes
++ Construct a graph
++ Each edge connects two scaffold ends
 + Merge unambiguous paths through this graph
 
-ARCS: Assembly Roundup by Chromium Scaffolding
+ARCS: Assembly Roundup by Chromium Scaffolding \
 bioRxiv: <https://doi.org/10.1101/100750>
 
 ----------------------------------------
 
 ![ARCS <https://github.com/bcgsc/arcs>](images/arcs.png)
 
-## Misassemblies limit scaffold contiguity
+## Misassemblies limit contiguity
 
-Contigs come to an end due to...
+Contigs and scaffolds come to an end due to...
 
 + repeats
 + sequencing gaps
++ heterozygous variation
 + misassemblies
 
+**Misassemblies limit scaffold contiguity** \
+for highly contiguous assemblies. \
 Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
-For highly contiguous assemblies, misassemblies limit scaffold contiguity.
 
 Tigmint
 ================================================================================
 
 ## Tigmint
 
-+ Construct a graph of segments sharing common barcodes
-+ Count molecules supporting each position
-+ Plot molecule coverage metrics
-+ Identify and correct misassemblies
++ Count molecules supporting and refuting each position of the assembly
++ Output positions of assembly breakpoints, \
+  putative misassemblies
+
+### Visualize
+
++ Plot molecule support metrics and breakpoints
++ Graph of 10 kbp segments that share barcodes
++ Colour each segment by its scaffold of origin
 
 ----------------------------------------
 
-![Graph of scaffold segments](images/segments-graph.png)
+[![Graph of scaffold segments](images/segments-graph.png)](images/segments-graph.pdf)
 
 ## Visualization
 
-+ Graph of scaffold segments
-+ Molecule start and end scatter plot
++ Graph of 10 kbp segments sharing barcodes
++ Scatter plot of molecule start and end position
 + Physical molecule coverage
 + Histogram of clipped read alignments at molecule ends
++ Highlight breakpoints (or putative misassemblies)
 
 ----------------------------------------
 
 ![500 kbp scaffold with three misassemblies](images/breakpoints.png)
 
-## Identifying and fixing misassemblies
+## Identify and fix misassemblies
 
-+ Regions with poor molecule coverage are suspect
-+ Depth less than the median minus two times the IQR
-+ Refine misassembly coordinates with base-pair accuracy
-  using clipped read alignments at molecule ends
++ Regions with poor molecule coverage \
+  are suspect
++ Depth less than median minus two times the IQR
++ Refine misassembly coordinates \
+  with base-pair accuracy
++ Use clipped read alignments at molecule ends
 
 ## Menagerie of Misassemblies
 
-+ Missing sequence (deletion)
-+ Chimeric fusion
++ **Chimeric fusion**
 + Chimeric insertion
-+ Collapsed repeat
 + Inversion
++ Collapsed non-tandem repeat
++ Missing sequence: \
+  scaffold gap, deletion, \
+  collapsed tandem repeat
 
 ----------------------------------------
 
