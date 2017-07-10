@@ -239,6 +239,10 @@ fin
 Supplementary Slides
 ================================================================================
 
+----------------------------------------
+
+![Depth of coverage per scaffold](images/scaffold-depth.png)
+
 ## Scaffolding Tools for 10x
 
 + [ARCS][] with [LINKS][]
