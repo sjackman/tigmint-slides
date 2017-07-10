@@ -130,7 +130,7 @@ Tigmint
 
 ----------------------------------------
 
-![500 kbp scaffold with three misassemblies](images/breakpoints.png)
+![A scaffold with three misassemblies](images/breakpoints.png)
 
 ## Identify and fix misassemblies
 
@@ -167,37 +167,31 @@ Sitka Spruce Mitochondrion
 Assemble the 6 Mbp Sitka spruce mitochondrion
 
 + Whole genome sequencing data contains both nuclear and organellar reads
-+ Each cell contains hundreds of mitochondria and plastids
++ Hundreds of mitochondria and plastids per cell
 + Reads of the organellar genomes are abundant
-+ Organellar sequences assemble well with a single lane
++ Organellar genomes assemble with a single lane
 + Single-copy nuclear sequences are too low depth to assemble well
 
 ----------------------------------------
 
 ![White spruce depth vs percent GC](images/picea-glauca-depth-gc.png)
 
-## Aim
-
-Assemble the Sitka spruce mitochondrion into a single scaffold\* using 10x Chromium data and annotate it.
-
-\* if it has a single chromosome
-
 ## Method
 
-+ Assemble the reads with [ABySS][]
++ Assemble the reads with [ABySS 2.0][ABySS]
 + Correct misassemblies with [Tigmint][]
 + Scaffold with [ARCS][] and [LINKS][]
++ Fill gaps with [Sealer][]
++ Polish with [Pilon][]
 + Annotate genes with [MAKER][] and [Prokka][]
 
 ## Results
 
-+ Assembled the 124 kbp plastid in a single contig
-+ Assembled the 6 Mbp mitochondrion in 4 scaffolds
-+ Largest scaffold is 4 Mbp
-+ 1/283 or 0.35% of reads are plastid
++ Assembled 6 Mbp mitochondrion in 4 scaffolds
++ Largest scaffold is 4.2 Mbp
 + 1/223 or 0.45% of reads are mitochondrial
-+ 115 ORFs with similarity to known mitochondrial genes
-+ 1,154 other ORFS ≥ 300 bp
++ 115 ORFs similar to known mitochondrial genes
++ 1,154 other ORFs ≥ 300 bp
 
 ----------------------------------------
 
@@ -222,29 +216,22 @@ fin
 
 [ABySS][]
 &middot; [ARCS][]
-&middot; [Architect][]
-&middot; [Fragscaff][]
 &middot; [LINKS][]
 &middot; [LongRanger][]
 &middot; [MAKER][]
 &middot; [Pilon][]
 &middot; [Prokka][]
-&middot; [RNAweasel][]
 &middot; [Sealer][]
 &middot; [Supernova][]
 &middot; [Tigmint][]
 
 [ABySS]: https://github.com/bcgsc/abyss
 [ARCS]: https://github.com/bcgsc/arcs
-[Architect]: https://github.com/kuleshov/architect
-[Fragscaff]: http://krishna.gs.washington.edu/software.html
-[Kollector]: https://github.com/bcgsc/kollector
 [LINKS]: https://github.com/warrenlr/LINKS
 [LongRanger]: https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger
 [MAKER]: http://www.yandell-lab.org/software/maker.html
-[Pilon]: http://www.broadinstitute.org/software/pilon/]
+[Pilon]: http://www.broadinstitute.org/software/pilon/
 [Prokka]: http://www.vicbioinformatics.com/software.prokka.shtml
-[RNAweasel]: http://megasun.bch.umontreal.ca/RNAweasel/
 [Sealer]: https://github.com/bcgsc/abyss/tree/master/Sealer
 [Supernova]: http://support.10xgenomics.com/de-novo-assembly/software/overview/welcome
 [Tigmint]: https://github.com/sjackman/tigmint-data
@@ -259,6 +246,9 @@ Supplementary Slides
   intended for synthetic long reads
 + [Fragscaff][] \
   intended for contiguity-preserving transposition
+
+[Architect]: https://github.com/kuleshov/architect
+[Fragscaff]: http://krishna.gs.washington.edu/software.html
 
 ----------------------------------------
 
