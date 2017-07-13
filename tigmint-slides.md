@@ -34,9 +34,6 @@ ISMB HiTSeq 2017-07-24&mdash;25
 [github.com/sjackman]: https://github.com/sjackman
 [sjackman.ca]: http://sjackman.ca
 
-Linked Reads
-================================================================================
-
 ## Linked reads
 
 + Large molecules of DNA are isolated in partitions
@@ -51,8 +48,6 @@ Linked Reads
 ----------------------------------------
 
 ![10x Genomics Chromium Linked Reads <http://www.10xgenomics.com/assembly/>](images/10xgenomics.png)
-
-# Utility of large molecules and linked reads
 
 ## Utility to Alignment
 
@@ -69,8 +64,6 @@ Linked Reads
 + **Scaffold** over coverages gaps in sequencing \
   caused by for example GC bias
 + **Identify and correct misassemblies**
-
-# ARCS
 
 ## Scaffold with ARCS
 
@@ -99,10 +92,6 @@ Contigs and scaffolds come to an end due to...
 **Misassemblies limit scaffold contiguity** \
 for highly contiguous assemblies. \
 Most scaffolding algorithms address repeats and gaps, but not misassemblies.
-
-
-Tigmint
-================================================================================
 
 ## Tigmint
 
@@ -159,39 +148,30 @@ Tigmint
 
 ![Chimeric fusion](images/4003:260000-300000.png)
 
-Sitka Spruce Mitochondrion
-================================================================================
+## Human assembly
 
-## Genome Skimming
++ Genome in a Bottle HG004
++ Assemble paired-end/mate-pair with ABySS 2.0
++ Correct misassemblies with Tigmint using 10x Chromium linked reads
++ Identified 39 breakpoints
++ Assembly discordant with the linked reads and the reference: likely misassembly
++ 38 of 39 breakpoints discordant with reference
++ Precision is 97%
++ Measuring sensitivity is more difficult
 
-Assemble the 6 Mbp Sitka spruce mitochondrion
 
-+ Whole genome sequencing data contains both nuclear and organellar reads
-+ Hundreds of mitochondria and plastids per cell
-+ Reads of the organellar genomes are abundant
-+ Organellar genomes assemble with a single lane
-+ Single-copy nuclear sequences are too low depth to assemble well
+## Sitka Spruce Mitochondrion
 
-----------------------------------------
++ Assembled organelles from WGSS \
+  with ABySS 2.0, ARCS, and Tigmint
++ 6 Mbp mitochondrial genome in 4 scaffolds
++ Nine fold improvement in N50
++ 70% of genome in one 4.2 Mbp scaffold
 
-![White spruce depth vs percent GC](images/picea-glauca-depth-gc.png)
-
-## Method
-
-+ Assemble the reads with [ABySS 2.0][ABySS]
-+ Correct misassemblies with [Tigmint][]
-+ Scaffold with [ARCS][] and [LINKS][]
-+ Fill gaps with [Sealer][]
-+ Polish with [Pilon][]
-+ Annotate genes with [MAKER][] and [Prokka][]
-
-## Results
-
-+ Assembled 6 Mbp mitochondrion in 4 scaffolds
-+ Largest scaffold is 4.2 Mbp
-+ 1/223 or 0.45% of reads are mitochondrial
-+ 115 ORFs similar to known mitochondrial genes
-+ 1,154 other ORFs ≥ 300 bp
+| Tools        | Scaffolds | N50      |
+|--------------|-----------|----------|
+| ABySS + ARCS | 16        | 0.46 Mbp |
+| + Tigmint    | 4         | 4.2 Mbp  |
 
 ----------------------------------------
 
@@ -253,6 +233,29 @@ Supplementary Slides
 
 [Architect]: https://github.com/kuleshov/architect
 [Fragscaff]: http://krishna.gs.washington.edu/software.html
+
+## Genome Skimming
+
+Assemble the 6 Mbp Sitka spruce mitochondrion
+
++ Whole genome sequencing data contains both nuclear and organellar reads
++ Hundreds of mitochondria and plastids per cell
++ Reads of the organellar genomes are abundant
++ Organellar genomes assemble with a single lane
++ Single-copy nuclear sequences are too low depth to assemble well
+
+----------------------------------------
+
+![White spruce depth vs percent GC](images/picea-glauca-depth-gc.png)
+
+## Method
+
++ Assemble the reads with [ABySS 2.0][ABySS]
++ Correct misassemblies with [Tigmint][]
++ Scaffold with [ARCS][] and [LINKS][]
++ Fill gaps with [Sealer][]
++ Polish with [Pilon][]
++ Annotate genes with [MAKER][] and [Prokka][]
 
 ----------------------------------------
 
