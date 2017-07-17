@@ -6,4 +6,8 @@ keywords: genome, assembly, misassembly correction, scaffolding, 10x, Chromium, 
 
 + [Slides](http://sjackman.ca/tigmint-slides/)
 + [Markdown](tigmint-slides.md)
-+ [Data analysis](https://github.com/sjackman/picea-sitchensis-mitochondrion)
+
+# Data Analysis
+
++ [Human assembly](https://github.com/sjackman/tigmint-data)
++ [*Picea sitchensis* mitochondrion](https://github.com/sjackman/picea-sitchensis-mitochondrion)
