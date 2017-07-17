@@ -13,7 +13,7 @@ slideNumber: true
 
 Benjamin P Vandervalk, Rene L Warren, Hamid Mohamadi, Justin Chu, Sarah Yeo, Lauren Coombe, Joerg Bohlmann, Steven JM Jones, Inanc Birol
 
-ISMB HiTSeq 2017-07-24&mdash;25
+ISMB HiTSeq 2017-07-25
 
 <https://sjackman.ca/tigmint-slides>
 
@@ -24,9 +24,8 @@ ISMB HiTSeq 2017-07-24&mdash;25
 
 ## Shaun Jackman
 
-| [BCCA Genome Sciences Centre][]
-| Vancouver, Canada
-| [\@sjackman][] | [github.com/sjackman][] | [sjackman.ca][]
+| [BCCA Genome Sciences Centre][] &middot; Vancouver, Canada
+| [\@sjackman][] &middot; [github.com/sjackman][] &middot; [sjackman.ca][]
 
 ![](images/sjackman.jpg)
 
@@ -34,137 +33,128 @@ ISMB HiTSeq 2017-07-24&mdash;25
 [github.com/sjackman]: https://github.com/sjackman
 [sjackman.ca]: http://sjackman.ca
 
-## Linked reads
+----------------------------------------
 
-+ Large molecules of DNA are isolated in partitions
-+ Construct barcoded reads from HMW DNA
-+ Each partition has its own barcode
-+ Reads from the same molecule \
-  share the same barcode
-+ Large molecules include 100 kbp and up
-+ One nanogram of input DNA \
-  with 10x Genomics Chromium
+![<https://sjackman.ca/tigmint-slides>](images/tigmint-logo.png)
 
 ----------------------------------------
 
 ![10x Genomics Chromium Linked Reads <http://www.10xgenomics.com/assembly/>](images/10xgenomics.png)
 
-## Utility to Alignment
+<aside class="notes">
++ Large molecules of DNA (100 kbp and up) are isolated in partitions
++ Each partition has its own barcode
++ Reads from the same molecule share the same barcode
++ One nanogram of input DNA with 10x Genomics Chromium
+</aside>
 
+## Linked Reads
+
++ Call variants in repetitive regions
 + Identify structural variants
-+ Phase variants across large haplotype blocks
-+ Map reads to large repeats and resolve ambiguous alignments (MAPQ=0)
-
-## Utility to Assembly
-
-+ One linked-read library rather than paired-end and mate-pair libraries
-+ Resolve repeats with local assembly, \
-  similar to phasing alleles
-+ **Scaffold** over unresolved repeats
-+ **Scaffold** over coverages gaps in sequencing \
-  caused by for example GC bias
-+ **Identify and correct misassemblies**
-
-## Scaffold with ARCS
-
-+ Map the reads to the assembly
-+ Identify scaffold ends sharing common barcodes
-+ Construct a graph
-+ Each edge connects two scaffold ends
-+ Merge unambiguous paths through this graph
-
-ARCS: Assembly Roundup by Chromium Scaffolding \
-bioRxiv: <https://doi.org/10.1101/100750>
++ Phase variants
 
 ----------------------------------------
 
-![ARCS <https://github.com/bcgsc/arcs>](images/arcs.png)
+![Scaffold with ARCS, Local assembly with Kollector](images/arcs-kollector.png)
 
-## Misassemblies limit contiguity
+<aside class="notes">
++ One sequencing library
++ Scaffold over gaps and repeats
++ Local assembly of gaps and repeats
++ Identify and correct misassemblies
+</aside>
 
-Contigs and scaffolds come to an end due to...
+## Contigs and scaffolds come to an end due to...
 
 + repeats
 + sequencing gaps
 + heterozygous variation
 + misassemblies
 
-**Misassemblies limit scaffold contiguity** \
+## Misassemblies limit contiguity
+
 for highly contiguous assemblies. \
 Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
+## Tools for Linked Reads
+
+### 10x Genomics
+
+[Long Ranger][] &middot; [Supernova][]
+
+### Scaffolding
+
+[ARCS][] &middot; [Architect][] &middot; [Fragscaff][]
+
+### Structural Variants
+
+[Topsorter][]
+
+<aside class="notes">
++ [Architect][] intended for synthetic long reads
++ [Fragscaff][] intended for contiguity-preserving transposition
++ [Topsorter][] requires a VCF file
+</aside>
+
 ## Tigmint
 
-+ Count molecules supporting and refuting each position of the assembly
-+ Output positions of assembly breakpoints, \
-  putative misassemblies
-
-### Visualize
-
-+ Plot molecule support metrics and breakpoints
-+ Graph of 10 kbp segments that share barcodes
-+ Colour each segment by its scaffold of origin
++ Count molecules that support and refute each position of the assembly
++ Output positions of possible misassemblies
 
 ----------------------------------------
 
 [![Graph of scaffold segments](images/segments-graph.png)](images/segments-graph.pdf)
 
-## Visualization
-
+<aside class="notes">
 + Graph of 10 kbp segments sharing barcodes
-+ Scatter plot of molecule start and end position
-+ Physical molecule coverage
-+ Histogram of clipped read alignments at molecule ends
-+ Highlight breakpoints (or putative misassemblies)
+</aside>
 
 ----------------------------------------
 
 ![A scaffold with three misassemblies](images/breakpoints.png)
 
-## Identify and fix misassemblies
+<aside class="notes">
++ Regions with poor molecule depth (< median - 2 IQR) are suspect
++ Clipped read alignments at molecule ends refine misassembly coordinates with base-pair accuracy
++ Highlight possible misassemblies
+</aside>
 
-+ Regions with poor molecule coverage \
-  are suspect
-+ Depth less than median minus two times the IQR
-+ Refine misassembly coordinates \
-  with base-pair accuracy
-+ Use clipped read alignments at molecule ends
+----------------------------------------
+
+![Chimeric scaffold involving a 2 kbp repeat ](images/4005:193000-200000.png)
 
 ## Menagerie of Misassemblies
 
 + **Chimeric fusion**
++ **Missing sequence** (deletion)
 + Chimeric insertion
 + Inversion
-+ Collapsed non-tandem repeat
-+ Missing sequence: \
-  scaffold gap, deletion, \
-  collapsed tandem repeat
++ Collapsed repeat
 
-----------------------------------------
+## Human Assembly
 
-![Misassembled repeat](images/4005:193000-200000.png)
-
-----------------------------------------
-
-![Chimeric fusion](images/4003:260000-300000.png)
-
-## Human assembly
-
-+ Genome in a Bottle HG004
 + Assemble paired-end/mate-pair with ABySS 2.0
-+ Correct misassemblies with Tigmint using 10x Chromium linked reads
-+ Identified 39 breakpoints
-+ Assembly discordant with the linked reads and the reference: likely misassembly
-+ 38 of 39 breakpoints discordant with reference
-+ Precision is 97%
-+ Measuring sensitivity is more difficult
++ Correct misassemblies with 10x Chromium
++ Assembly locus discordant with both the linked reads and the reference is likely a misassembly
++ Tigmint identified 39 breakpoints
++ 38 of 39 (97%) discordant with the reference
 
+----------------------------------------
 
 ## Sitka Spruce Mitochondrion
 
+### Before and After Tigmint
+
+![Before Tigmint](images/psitchensiscpmt_2.50kbp.gfa.png)
+![After Tigmint + ARCS](images/psitchensiscpmt_6.50kbp.gfa.png)
+
+N50 improved nine fold from 0.46 Mbp to 4.2 Mbp
+
+<aside class="notes">
 + Assembled organelles from WGSS \
   with ABySS 2.0, ARCS, and Tigmint
-+ 6 Mbp mitochondrial genome in 4 scaffolds
++ 6 Mbp mitochondrial genome in 4 scaffolds > 50 kbp
 + Nine fold improvement in N50
 + 70% of genome in one 4.2 Mbp scaffold
 
@@ -173,9 +163,7 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 | ABySS + ARCS | 16        | 0.46 Mbp |
 | + Tigmint    | 4         | 4.2 Mbp  |
 
-----------------------------------------
-
-![Sitka spruce mitochondrion](images/picea-sitchensis-mitochondrion.png)
+</aside>
 
 fin
 ================================================================================
@@ -196,43 +184,70 @@ fin
 
 [ABySS][]
 &middot; [ARCS][]
+&middot; [Architect][]
+&middot; [Fragscaff][]
 &middot; [LINKS][]
-&middot; [LongRanger][]
+&middot; [Long Ranger][]
 &middot; [MAKER][]
 &middot; [Pilon][]
 &middot; [Prokka][]
 &middot; [Sealer][]
 &middot; [Supernova][]
 &middot; [Tigmint][]
+&middot; [Topsorter][]
 
 [ABySS]: https://github.com/bcgsc/abyss
 [ARCS]: https://github.com/bcgsc/arcs
+[Architect]: https://github.com/kuleshov/architect
+[Fragscaff]: http://krishna.gs.washington.edu/software.html
 [LINKS]: https://github.com/warrenlr/LINKS
-[LongRanger]: https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger
+[Long Ranger]: https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger
 [MAKER]: http://www.yandell-lab.org/software/maker.html
 [Pilon]: http://www.broadinstitute.org/software/pilon/
 [Prokka]: http://www.vicbioinformatics.com/software.prokka.shtml
 [Sealer]: https://github.com/bcgsc/abyss/tree/master/Sealer
 [Supernova]: http://support.10xgenomics.com/de-novo-assembly/software/overview/welcome
 [Tigmint]: https://github.com/sjackman/tigmint-data
+[Topsorter]: https://github.com/hanfang/Topsorter
 
 Supplementary Slides
 ================================================================================
 
+## Linked reads
+
++ Large molecules of DNA (100 kbp and up) are isolated in partitions
++ Each partition has its own barcode
++ Reads from the same molecule share the same barcode
++ One nanogram of input DNA with 10x Genomics Chromium
+
+## Scaffold with ARCS
+
++ Map the reads to the assembly
++ Identify scaffold ends sharing common barcodes
++ Construct a graph
++ Each edge connects two scaffold ends
++ Merge unambiguous paths through this graph
+
+ARCS: Assembly Roundup by Chromium Scaffolding \
+bioRxiv: <https://doi.org/10.1101/100750>
+
 ----------------------------------------
 
-![Depth of coverage per scaffold](images/scaffold-depth.png)
+![ARCS <https://github.com/bcgsc/arcs>](images/arcs.png)
 
-## Scaffolding Tools for 10x
+----------------------------------------
 
-+ [ARCS][] with [LINKS][]
-+ [Architect][] \
-  intended for synthetic long reads
-+ [Fragscaff][] \
-  intended for contiguity-preserving transposition
+## Visualization
 
-[Architect]: https://github.com/kuleshov/architect
-[Fragscaff]: http://krishna.gs.washington.edu/software.html
++ Graph of 10 kbp segments sharing barcodes
++ Scatter plot of molecule start and end position
++ Physical molecule coverage
++ Histogram of clipped read alignments at molecule ends
++ Highlight breakpoints (or putative misassemblies)
+
+----------------------------------------
+
+![Chimeric fusion](images/4003:260000-300000.png)
 
 ## Human Assemblies
 
@@ -241,6 +256,8 @@ Supplementary Slides
 | ABySS                  | 39             | 38 (97%)          | 2717          | 2679             |
 | ABySS + Bionano + ARCS | 78             | 14 (18%)          | 2757          | 2743             |
 | Supernova              | 163            | 56 (34%)          | 3883          | 3827             |
+
+Genome in a Bottle HG004
 
 ## Genome Skimming
 
@@ -264,6 +281,27 @@ Assemble the 6 Mbp Sitka spruce mitochondrion
 + Fill gaps with [Sealer][]
 + Polish with [Pilon][]
 + Annotate genes with [MAKER][] and [Prokka][]
+
+## Sitka Spruce Mitochondrion
+
++ Assembled organelles from WGSS \
+  with ABySS 2.0, ARCS, and Tigmint
++ 6 Mbp mitochondrial genome in 4 scaffolds
++ Nine fold improvement in N50
++ 70% of genome in one 4.2 Mbp scaffold
+
+| Tools        | Scaffolds | N50      |
+|--------------|-----------|----------|
+| ABySS + ARCS | 16        | 0.46 Mbp |
+| + Tigmint    | 4         | 4.2 Mbp  |
+
+----------------------------------------
+
+![Depth of coverage per scaffold](images/scaffold-depth.png)
+
+----------------------------------------
+
+![Sitka spruce mitochondrion](images/picea-sitchensis-mitochondrion.png)
 
 ----------------------------------------
 
