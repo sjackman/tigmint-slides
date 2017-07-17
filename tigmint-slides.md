@@ -234,6 +234,14 @@ Supplementary Slides
 [Architect]: https://github.com/kuleshov/architect
 [Fragscaff]: http://krishna.gs.washington.edu/software.html
 
+## Human Assemblies
+
+| Assembly               | Tigmint breaks | Discordant breaks | Breaks before | Breaks after     |
+|------------------------|----------------|-------------------|---------------|------------------|
+| ABySS                  | 39             | 38 (97%)          | 2717          | 2679             |
+| ABySS + Bionano + ARCS | 78             | 14 (18%)          | 2757          | 2743             |
+| Supernova              | 163            | 56 (34%)          | 3883          | 3827             |
+
 ## Genome Skimming
 
 Assemble the 6 Mbp Sitka spruce mitochondrion
