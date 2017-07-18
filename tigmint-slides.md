@@ -104,13 +104,16 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
 ----------------------------------------
 
-![A scaffold with three misassemblies](images/scatterplot.png)
+![](images/depth-starts.png)
 
-<aside class="notes">
-+ Regions with poor molecule depth (< median - 2 IQR) are suspect
-+ Clipped read alignments at molecule ends refine misassembly coordinates with base-pair accuracy
++ Regions with poor molecule depth are suspect
++ Clipped read alignments at molecule ends \
+  pinpoint the position of the breakpoint
 + Highlight possible misassemblies
-</aside>
+
+----------------------------------------
+
+![Scatter plot of molecule start and end coordiantes](images/scatterplot.png)
 
 ----------------------------------------
 
