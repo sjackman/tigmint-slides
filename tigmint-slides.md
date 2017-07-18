@@ -104,7 +104,7 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
 ----------------------------------------
 
-![A scaffold with three misassemblies](images/breakpoints.png)
+![A scaffold with three misassemblies](images/scatterplot.png)
 
 <aside class="notes">
 + Regions with poor molecule depth (< median - 2 IQR) are suspect
