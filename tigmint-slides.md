@@ -104,14 +104,6 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
 ----------------------------------------
 
-[![Graph of scaffold segments](images/segments-graph.png)](images/segments-graph.pdf)
-
-<aside class="notes">
-+ Graph of 10 kbp segments sharing barcodes
-</aside>
-
-----------------------------------------
-
 ![A scaffold with three misassemblies](images/breakpoints.png)
 
 <aside class="notes">
@@ -122,11 +114,11 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
 ----------------------------------------
 
-![Chimeric scaffold involving a 2 kbp repeat ](images/4005:193000-200000.png)
+[![Graph of 10 kbp segments sharing barcodes](images/segments-graph.png)](images/segments-graph.pdf)
 
 ## Menagerie of Misassemblies
 
-+ **Chimeric fusion**
++ **Chimeric sequence**
 + **Missing sequence** (deletion)
 + Chimeric insertion
 + Inversion
@@ -247,7 +239,11 @@ bioRxiv: <https://doi.org/10.1101/100750>
 
 ----------------------------------------
 
-![Chimeric fusion](images/4003:260000-300000.png)
+![Chimeric scaffold involving a 2 kbp repeat ](images/4005:193000-200000.png)
+
+----------------------------------------
+
+![Chimeric sequence](images/4003:260000-300000.png)
 
 ## Human Assemblies
 
