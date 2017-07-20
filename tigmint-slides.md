@@ -202,6 +202,9 @@ fin
 | Vancouver, Canada
 | [\@sjackman][] | [github.com/sjackman][] | [sjackman.ca][]
 
+**Tigmint** \
+<https://github.com/bcgsc/tigmint>
+
 **Slides** \
 <https://sjackman.ca/tigmint-slides>
 
@@ -237,7 +240,7 @@ fin
 [Prokka]: http://www.vicbioinformatics.com/software.prokka.shtml
 [Sealer]: https://github.com/bcgsc/abyss/tree/master/Sealer
 [Supernova]: http://support.10xgenomics.com/de-novo-assembly/software/overview/welcome
-[Tigmint]: https://github.com/sjackman/tigmint-data
+[Tigmint]: https://github.com/bcgsc/tigmint
 [Topsorter]: https://github.com/hanfang/Topsorter
 
 Supplementary Slides
