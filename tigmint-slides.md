@@ -54,6 +54,26 @@ ISMB HiTSeq 2017-07-25
 + Identify structural variants
 + Phase variants
 
+## Tools for Linked Reads
+
+### 10x Genomics
+
+[Long Ranger][] &middot; [Supernova][]
+
+### Structural Variants
+
+[GROC-SVs][] &middot; [Topsorter][]
+
+### Scaffolding
+
+[ARCS][] &middot; [Architect][] &middot; [Fragscaff][]
+
+<aside class="notes">
++ [Architect][] intended for synthetic long reads
++ [Fragscaff][] intended for contiguity-preserving transposition
++ [Topsorter][] requires a VCF file
+</aside>
+
 ----------------------------------------
 
 ![Scaffold with ARCS, Local assembly with Kollector](images/arcs-kollector.png)
@@ -95,26 +115,6 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 ![Scaffold](images/diagram-2.png)
 
 ![](images/diagram-3.png)
-
-## Tools for Linked Reads
-
-### 10x Genomics
-
-[Long Ranger][] &middot; [Supernova][]
-
-### Scaffolding
-
-[ARCS][] &middot; [Architect][] &middot; [Fragscaff][]
-
-### Structural Variants
-
-[GROC-SVs][] &middot; [Topsorter][]
-
-<aside class="notes">
-+ [Architect][] intended for synthetic long reads
-+ [Fragscaff][] intended for contiguity-preserving transposition
-+ [Topsorter][] requires a VCF file
-</aside>
 
 ## Tigmint
 
