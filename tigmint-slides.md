@@ -74,8 +74,27 @@ ISMB HiTSeq 2017-07-25
 
 ## Misassemblies limit contiguity
 
-for highly contiguous assemblies. \
+particularly for highly contiguous assemblies.
+
 Most scaffolding algorithms address repeats and gaps, but not misassemblies.
+
+----------------------------------------
+
+![](images/diagram-1.png)
+
+----------------------------------------
+
+![Correct misassemblies](images/diagram-1.png)
+
+![](images/diagram-2.png)
+
+----------------------------------------
+
+![Correct misassemblies](images/diagram-1.png)
+
+![Scaffold](images/diagram-2.png)
+
+![](images/diagram-3.png)
 
 ## Tools for Linked Reads
 
