@@ -127,6 +127,18 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 + Inversion
 + Collapsed repeat
 
+----------------------------------------
+
+![](images/10826995:19862.png)
+
+----------------------------------------
+
+![](images/10824873:254952.png)
+
+----------------------------------------
+
+![](images/10827046:2634045.png)
+
 ## Human Assembly
 
 + Assemble paired-end/mate-pair with ABySS 2.0
@@ -134,8 +146,6 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 + Assembly locus discordant with both the linked reads and the reference is likely a misassembly
 + Tigmint identified 39 breakpoints
 + 38 of 39 (97%) discordant with the reference
-
-----------------------------------------
 
 ## Sitka Spruce Mitochondrion
 
@@ -244,7 +254,7 @@ bioRxiv: <https://doi.org/10.1101/100750>
 
 ----------------------------------------
 
-![Chimeric scaffold involving a 2 kbp repeat ](images/4005:193000-200000.png)
+![Chimeric scaffold involving a 2 kbp repeat](images/4005:193000-200000.png)
 
 ----------------------------------------
 
