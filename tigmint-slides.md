@@ -89,7 +89,7 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
 ### Structural Variants
 
-[Topsorter][]
+[GROC-SVs][] &middot; [Topsorter][]
 
 <aside class="notes">
 + [Architect][] intended for synthetic long reads
@@ -181,6 +181,7 @@ fin
 &middot; [ARCS][]
 &middot; [Architect][]
 &middot; [Fragscaff][]
+&middot; [GROC-SVs][]
 &middot; [LINKS][]
 &middot; [Long Ranger][]
 &middot; [MAKER][]
@@ -195,6 +196,7 @@ fin
 [ARCS]: https://github.com/bcgsc/arcs
 [Architect]: https://github.com/kuleshov/architect
 [Fragscaff]: http://krishna.gs.washington.edu/software.html
+[GROC-SVs]: https://github.com/grocsvs/grocsvs
 [LINKS]: https://github.com/warrenlr/LINKS
 [Long Ranger]: https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger
 [MAKER]: http://www.yandell-lab.org/software/maker.html
