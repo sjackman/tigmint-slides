@@ -168,6 +168,10 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
 ## Sitka Spruce Mitochondrion
 
+![16 scaffolds, N50 is 0.46 Mbp](images/psitchensiscpmt_2.50kbp.gfa.png)
+
+## Sitka Spruce Mitochondrion
+
 ### Before and After Tigmint
 
 ![Before Tigmint](images/psitchensiscpmt_2.50kbp.gfa.png)
