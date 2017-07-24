@@ -162,8 +162,18 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 + Assemble paired-end/mate-pair with ABySS 2.0
 + Correct misassemblies with 10x Chromium
 + Assembly locus discordant with both the linked reads and the reference is likely a misassembly
-+ Tigmint identified 39 breakpoints
-+ 38 of 39 (97%) discordant with the reference
+
+. . .
+
+Requiring 4 clipped molecules \
+Tigmint identified 39 breakpoints. \
+38 of 39 (97%) discordant with the reference
+
+. . .
+
+Requiring 3 clipped molecules, \
+Tigmint identified 184 breakpoints. \
+104 of 184 (57%) discordant with the reference
 
 ## Sitka Spruce Mitochondrion
 
