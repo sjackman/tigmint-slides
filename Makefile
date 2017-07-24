@@ -19,6 +19,9 @@ install-deps:
 %.html: %.md reveal.js/js/reveal.js
 	pandoc -st revealjs -V theme:sky -o $@ $<
 
+%-self-contained.html: %.md reveal.js/js/reveal.js
+	pandoc -st revealjs -V theme:sky --self-contained -o $@ $<
+
 index.html: tigmint-slides.html
 	cp $< $@
 
