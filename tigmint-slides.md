@@ -13,18 +13,17 @@ slideNumber: true
 
 Benjamin P Vandervalk, Rene L Warren, Hamid Mohamadi, Justin Chu, Sarah Yeo, Lauren Coombe, Joerg Bohlmann, Steven JM Jones, Inanc Birol
 
-ISMB HiTSeq 2017-07-25
-
-<https://sjackman.ca/tigmint-slides>
-
-[![Creative Commons Attribution License](images/cc-by.png)][cc-by]
+| ISMB HiTSeq 2017-07-25
+| <https://sjackman.ca/tigmint-slides>
+| [![Creative Commons Attribution License](images/cc-by.png)][cc-by]
 
 [\@sjackman]: http://twitter.com/sjackman
 [cc-by]: http://creativecommons.org/licenses/by/4.0/
 
 ## Shaun Jackman
 
-| [BCCA Genome Sciences Centre][] &middot; Vancouver, Canada
+| [BCCA Genome Sciences Centre][]
+| Vancouver, Canada
 | [\@sjackman][] &middot; [github.com/sjackman][] &middot; [sjackman.ca][]
 
 ![](images/sjackman.jpg)
@@ -35,7 +34,7 @@ ISMB HiTSeq 2017-07-25
 
 ----------------------------------------
 
-![<https://sjackman.ca/tigmint-slides>](images/tigmint-logo.png)
+![<https://github.com/bcgsc/tigmint>](images/tigmint-logo.png)
 
 ----------------------------------------
 
@@ -76,7 +75,7 @@ ISMB HiTSeq 2017-07-25
 
 ----------------------------------------
 
-![Scaffold with ARCS, Local assembly with Kollector](images/arcs-kollector.png)
+![Scaffold with ARCS &middot; Local assembly with Kollector](images/arcs-kollector.png)
 
 <aside class="notes">
 + One sequencing library
@@ -200,7 +199,7 @@ fin
 
 | [BCCA Genome Sciences Centre][]
 | Vancouver, Canada
-| [\@sjackman][] | [github.com/sjackman][] | [sjackman.ca][]
+| [\@sjackman][] &middot; [github.com/sjackman][] &middot; [sjackman.ca][]
 
 **Tigmint** \
 <https://github.com/bcgsc/tigmint>
