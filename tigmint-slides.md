@@ -75,7 +75,10 @@ Benjamin P Vandervalk, Rene L Warren, Hamid Mohamadi, Justin Chu, Sarah Yeo, Lau
 
 ----------------------------------------
 
-![Scaffold with ARCS &middot; Local assembly with Kollector](images/arcs-kollector.png)
+![](images/arcs-kollector.png)
+
+| B-040 &middot; Local assembly with Kollector &middot; Justin Chu
+| B-048 &middot; ABySS 2.0 &middot; Ben Vandervalk
 
 <aside class="notes">
 + One sequencing library
@@ -186,7 +189,8 @@ Tigmint identified 184 breakpoints. \
 ![Before Tigmint](images/psitchensiscpmt_2.50kbp.gfa.png)
 ![After Tigmint + ARCS](images/psitchensiscpmt_6.50kbp.gfa.png)
 
-N50 improved nine fold from 0.46 Mbp to 4.2 Mbp
+| N50 improved nine fold from 0.46 Mbp to 4.2 Mbp
+| Poster B-066
 
 <aside class="notes">
 + Assembled organelles from WGSS \
@@ -294,6 +298,24 @@ bioRxiv: <https://doi.org/10.1101/100750>
 ----------------------------------------
 
 ![Chimeric sequence](images/4003:260000-300000.png)
+
+## Human Assembly
+
++ Assemble paired-end/mate-pair with ABySS 2.0
++ Correct misassemblies with 10x Chromium
++ Assembly locus discordant with both the linked reads and the reference is likely a misassembly
+
+Requiring 4 clipped molecules \
+Tigmint identified 39 breakpoints. \
+38 of 39 (97%) discordant with the reference
+
+Requiring 3 clipped molecules, \
+Tigmint identified 184 breakpoints. \
+104 of 184 (57%) discordant with the reference
+
+Requiring 2 clipped molecules, \
+Tigmint identified 1995 breakpoints. \
+250 of 1995 (12.5%) discordant with the reference
 
 ## Human Assemblies
 
