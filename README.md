@@ -4,7 +4,8 @@ Shaun D Jackman, Benjamin P Vandervalk, Rene L Warren, Hamid Mohamadi, Justin Ch
 
 keywords: genome, assembly, misassembly correction, scaffolding, 10x, Chromium, linked reads, ABySS, gymnosperm, mitochondrion
 
-+ [Slides](http://sjackman.ca/tigmint-slides/)
++ [HTML Slides](http://sjackman.ca/tigmint-slides/)
++ [PDF Slides](https://github.com/sjackman/tigmint-slides/blob/master/tigmint-slides.pdf)
 + [Markdown](tigmint-slides.md)
 
 # Data Analysis
