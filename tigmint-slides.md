@@ -160,23 +160,21 @@ Most scaffolding algorithms address repeats and gaps, but not misassemblies.
 
 ![](images/10827046:2634045.png)
 
-## Human Assembly
+----------------------------------------
 
-+ Assemble paired-end/mate-pair with ABySS 2.0
-+ Correct misassemblies with 10x Chromium
-+ Assembly locus discordant with both the linked reads and the reference is likely a misassembly
+![ABySS 2.0 assembly of GIAB HG004](images/abyss.png)
 
-. . .
+----------------------------------------
 
-Requiring 4 clipped molecules \
-Tigmint identified 39 breakpoints. \
-38 of 39 (97%) discordant with the reference
+![Tigmint, at least 4 clipped molecules](images/abyss_starts4.png)
 
-. . .
+----------------------------------------
 
-Requiring 3 clipped molecules, \
-Tigmint identified 184 breakpoints. \
-104 of 184 (57%) discordant with the reference
+![Tigmint, at least 3 clipped molecules](images/abyss_starts3.png)
+
+----------------------------------------
+
+![Tigmint, at least 2 clipped molecules](images/abyss_starts2.png)
 
 ## Sitka Spruce Mitochondrion
 
