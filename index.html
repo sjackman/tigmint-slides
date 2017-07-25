@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Shaun D Jackman">
+  <meta name="dcterms.date" content="2017-07-24">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="tigmint" class="slide level2">
+<h2>Tigmint</h2>
+<h3 id="correct-misassemblies-using-linked-reads-from-large-molecules">Correct Misassemblies Using Linked Reads From Large Molecules</h3>
+<p><strong>Shaun Jackman</strong> <a href="http://twitter.com/sjackman">@sjackman</a></p>
+<p>Benjamin P Vandervalk, Rene L Warren, Hamid Mohamadi, Justin Chu, Sarah Yeo, Lauren Coombe, Joerg Bohlmann, Steven JM Jones, Inanc Birol</p>
+<div style="white-space: pre-line;">ISMB HiTSeq 2017-07-25
+<a href="https://sjackman.ca/tigmint-slides" class="uri">https://sjackman.ca/tigmint-slides</a>
+<a href="http://creativecommons.org/licenses/by/4.0/"><img src="images/cc-by.png" alt="Creative Commons Attribution License" /></a></div>
+</section>
+<section id="shaun-jackman" class="slide level2">
+<h2>Shaun Jackman</h2>
+<div style="white-space: pre-line;"><a href="http://bcgsc.ca">BCCA Genome Sciences Centre</a>
+Vancouver, Canada
+<a href="http://twitter.com/sjackman">@sjackman</a> · <a href="https://github.com/sjackman">github.com/sjackman</a> · <a href="http://sjackman.ca">sjackman.ca</a></div>
+<figure>
+<img src="images/sjackman.jpg" />
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/tigmint-logo.png" alt="https://github.com/bcgsc/tigmint" /><figcaption><a href="https://github.com/bcgsc/tigmint" class="uri">https://github.com/bcgsc/tigmint</a></figcaption>
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/10xgenomics.png" alt="10x Genomics Chromium Linked Reads http://www.10xgenomics.com/assembly/" /><figcaption>10x Genomics Chromium Linked Reads <a href="http://www.10xgenomics.com/assembly/" class="uri">http://www.10xgenomics.com/assembly/</a></figcaption>
+</figure>
+<aside class="notes">
+<ul>
+<li>Large molecules of DNA (100 kbp and up) are isolated in partitions</li>
+<li>Each partition has its own barcode</li>
+<li>Reads from the same molecule share the same barcode</li>
+<li>One nanogram of input DNA with 10x Genomics Chromium</li>
+</ul>
+</aside>
+</section>
+<section id="linked-reads" class="slide level2">
+<h2>Linked Reads</h2>
+<ul>
+<li>Call variants in repetitive regions</li>
+<li>Identify structural variants</li>
+<li>Phase variants</li>
+</ul>
+</section>
+<section id="tools-for-linked-reads" class="slide level2">
+<h2>Tools for Linked Reads</h2>
+<h3 id="x-genomics">10x Genomics</h3>
+<p><a href="https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger">Long Ranger</a> · <a href="http://support.10xgenomics.com/de-novo-assembly/software/overview/welcome">Supernova</a></p>
+<h3 id="structural-variants">Structural Variants</h3>
+<p><a href="https://github.com/grocsvs/grocsvs">GROC-SVs</a> · <a href="https://github.com/hanfang/Topsorter">Topsorter</a></p>
+<h3 id="scaffolding">Scaffolding</h3>
+<p><a href="https://github.com/bcgsc/arcs">ARCS</a> · <a href="https://github.com/kuleshov/architect">Architect</a> · <a href="http://krishna.gs.washington.edu/software.html">Fragscaff</a></p>
+<aside class="notes">
+<ul>
+<li><a href="https://github.com/kuleshov/architect">Architect</a> intended for synthetic long reads</li>
+<li><a href="http://krishna.gs.washington.edu/software.html">Fragscaff</a> intended for contiguity-preserving transposition</li>
+<li><a href="https://github.com/hanfang/Topsorter">Topsorter</a> requires a VCF file</li>
+</ul>
+</aside>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/arcs-kollector.png" />
+</figure>
+<div style="white-space: pre-line;">B-040 · Local assembly with Kollector · Justin Chu
+B-048 · ABySS 2.0 · Ben Vandervalk</div>
+<aside class="notes">
+<ul>
+<li>One sequencing library</li>
+<li>Scaffold over gaps and repeats</li>
+<li>Local assembly of gaps and repeats</li>
+<li>Identify and correct misassemblies</li>
+</ul>
+</aside>
+</section>
+<section id="contigs-and-scaffolds-come-to-an-end-due-to..." class="slide level2">
+<h2>Contigs and scaffolds come to an end due to...</h2>
+<ul>
+<li>repeats</li>
+<li>sequencing gaps</li>
+<li>heterozygous variation</li>
+<li>misassemblies</li>
+</ul>
+</section>
+<section id="misassemblies-limit-contiguity" class="slide level2">
+<h2>Misassemblies limit contiguity</h2>
+<p>particularly for highly contiguous assemblies.</p>
+<p>Most scaffolding algorithms address repeats and gaps, but not misassemblies.</p>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/diagram-1.png" />
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/diagram-1.png" alt="Correct misassemblies" /><figcaption>Correct misassemblies</figcaption>
+</figure>
+<figure>
+<img src="images/diagram-2.png" />
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/diagram-1.png" alt="Correct misassemblies" /><figcaption>Correct misassemblies</figcaption>
+</figure>
+<figure>
+<img src="images/diagram-2.png" alt="Scaffold" /><figcaption>Scaffold</figcaption>
+</figure>
+<figure>
+<img src="images/diagram-3.png" />
+</figure>
+</section>
+<section id="tigmint-1" class="slide level2">
+<h2>Tigmint</h2>
+<ul>
+<li>Count molecules that support and refute each position of the assembly</li>
+<li>Output positions of possible misassemblies</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/depth-starts.png" />
+</figure>
+<ul>
+<li>Regions with poor molecule depth are suspect</li>
+<li>Clipped read alignments at molecule ends<br />
+pinpoint the position of the breakpoint</li>
+<li>Highlight possible misassemblies</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/scatterplot.png" alt="Scatter plot of molecule start and end coordiantes" /><figcaption>Scatter plot of molecule start and end coordiantes</figcaption>
+</figure>
+</section>
+<section class="slide level2">
+
+<p><a href="images/segments-graph.pdf"><img src="images/segments-graph.png" alt="Graph of 10 kbp segments sharing barcodes" /></a></p>
+</section>
+<section id="menagerie-of-misassemblies" class="slide level2">
+<h2>Menagerie of Misassemblies</h2>
+<ul>
+<li><strong>Chimeric sequence</strong></li>
+<li><strong>Missing sequence</strong> (deletion)</li>
+<li>Chimeric insertion</li>
+<li>Inversion</li>
+<li>Collapsed repeat</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/10826995:19862.png" />
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/10824873:254952.png" />
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/10827046:2634045.png" />
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/abyss.png" alt="ABySS 2.0 assembly of GIAB HG004" /><figcaption>ABySS 2.0 assembly of GIAB HG004</figcaption>
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/abyss_starts4.png" alt="Tigmint, at least 4 clipped molecules" /><figcaption>Tigmint, at least 4 clipped molecules</figcaption>
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/abyss_starts3.png" alt="Tigmint, at least 3 clipped molecules" /><figcaption>Tigmint, at least 3 clipped molecules</figcaption>
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img src="images/abyss_starts2.png" alt="Tigmint, at least 2 clipped molecules" /><figcaption>Tigmint, at least 2 clipped molecules</figcaption>
+</figure>
+</section>
+<section id="sitka-spruce-mitochondrion" class="slide level2">
+<h2>Sitka Spruce Mitochondrion</h2>
+<figure>
+<img src="images/psitchensiscpmt_2.50kbp.gfa.png" alt="16 scaffolds, N50 is 0.46 Mbp" /><figcaption>16 scaffolds, N50 is 0.46 Mbp</figcaption>
+</figure>
+</section>
+<section id="sitka-spruce-mitochondrion-1" class="slide level2">
+<h2>Sitka Spruce Mitochondrion</h2>
+<h3 id="before-and-after-tigmint">Before and After Tigmint</h3>
+<p><img src="images/psitchensiscpmt_2.50kbp.gfa.png" alt="Before Tigmint" /> <img src="images/psitchensiscpmt_6.50kbp.gfa.png" alt="After Tigmint + ARCS" /></p>
+<div style="white-space: pre-line;">N50 improved nine fold from 0.46 Mbp to 4.2 Mbp
+Poster B-066</div>
+<aside class="notes">
+<ul>
+<li>Assembled organelles from WGSS<br />
+with ABySS 2.0, ARCS, and Tigmint</li>
+<li>6 Mbp mitochondrial genome in 4 scaffolds &gt; 50 kbp</li>
+<li>Nine fold improvement in N50</li>
+<li>70% of genome in one 4.2 Mbp scaffold</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Tools</th>
+<th>Scaffolds</th>
+<th>N50</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ABySS + ARCS</td>
+<td>16</td>
+<td>0.46 Mbp</td>
+</tr>
+<tr class="even">
+<td>+ Tigmint</td>
+<td>4</td>
+<td>4.2 Mbp</td>
+</tr>
+</tbody>
+</table>
+</aside>
+</section>
+<section><section id="fin" class="titleslide slide level1"><h1>fin</h1></section><section id="shaun-jackman-1" class="slide level2">
+<h2>Shaun Jackman</h2>
+<div style="white-space: pre-line;"><a href="http://bcgsc.ca">BCCA Genome Sciences Centre</a>
+Vancouver, Canada
+<a href="http://twitter.com/sjackman">@sjackman</a> · <a href="https://github.com/sjackman">github.com/sjackman</a> · <a href="http://sjackman.ca">sjackman.ca</a></div>
+<p><strong>Tigmint</strong><br />
+<a href="https://github.com/bcgsc/tigmint" class="uri">https://github.com/bcgsc/tigmint</a></p>
+<p><strong>Slides</strong><br />
+<a href="https://sjackman.ca/tigmint-slides" class="uri">https://sjackman.ca/tigmint-slides</a></p>
+<p><strong>Markdown source code</strong><br />
+<a href="https://github.com/sjackman/tigmint-slides" class="uri">https://github.com/sjackman/tigmint-slides</a></p>
+</section><section id="links" class="slide level2">
+<h2>Links</h2>
+<p><a href="https://github.com/bcgsc/abyss">ABySS</a> · <a href="https://github.com/bcgsc/arcs">ARCS</a> · <a href="https://github.com/kuleshov/architect">Architect</a> · <a href="http://krishna.gs.washington.edu/software.html">Fragscaff</a> · <a href="https://github.com/grocsvs/grocsvs">GROC-SVs</a> · <a href="https://github.com/warrenlr/LINKS">LINKS</a> · <a href="https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger">Long Ranger</a> · <a href="http://www.yandell-lab.org/software/maker.html">MAKER</a> · <a href="http://www.broadinstitute.org/software/pilon/">Pilon</a> · <a href="http://www.vicbioinformatics.com/software.prokka.shtml">Prokka</a> · <a href="https://github.com/bcgsc/abyss/tree/master/Sealer">Sealer</a> · <a href="http://support.10xgenomics.com/de-novo-assembly/software/overview/welcome">Supernova</a> · <a href="https://github.com/bcgsc/tigmint">Tigmint</a> · <a href="https://github.com/hanfang/Topsorter">Topsorter</a></p>
+</section></section>
+<section><section id="supplementary-slides" class="titleslide slide level1"><h1>Supplementary Slides</h1></section><section id="linked-reads-1" class="slide level2">
+<h2>Linked reads</h2>
+<ul>
+<li>Large molecules of DNA (100 kbp and up) are isolated in partitions</li>
+<li>Each partition has its own barcode</li>
+<li>Reads from the same molecule share the same barcode</li>
+<li>One nanogram of input DNA with 10x Genomics Chromium</li>
+</ul>
+</section><section id="scaffold-with-arcs" class="slide level2">
+<h2>Scaffold with ARCS</h2>
+<ul>
+<li>Map the reads to the assembly</li>
+<li>Identify scaffold ends sharing common barcodes</li>
+<li>Construct a graph</li>
+<li>Each edge connects two scaffold ends</li>
+<li>Merge unambiguous paths through this graph</li>
+</ul>
+<p>ARCS: Assembly Roundup by Chromium Scaffolding<br />
+bioRxiv: <a href="https://doi.org/10.1101/100750" class="uri">https://doi.org/10.1101/100750</a></p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/arcs.png" alt="ARCS https://github.com/bcgsc/arcs" /><figcaption>ARCS <a href="https://github.com/bcgsc/arcs" class="uri">https://github.com/bcgsc/arcs</a></figcaption>
+</figure>
+</section><section id="visualization" class="slide level2">
+<h2>Visualization</h2>
+<ul>
+<li>Graph of 10 kbp segments sharing barcodes</li>
+<li>Scatter plot of molecule start and end position</li>
+<li>Physical molecule coverage</li>
+<li>Histogram of clipped read alignments at molecule ends</li>
+<li>Highlight breakpoints (or putative misassemblies)</li>
+</ul>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/4005:193000-200000.png" alt="Chimeric scaffold involving a 2 kbp repeat" /><figcaption>Chimeric scaffold involving a 2 kbp repeat</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/4003:260000-300000.png" alt="Chimeric sequence" /><figcaption>Chimeric sequence</figcaption>
+</figure>
+</section><section id="human-assembly" class="slide level2">
+<h2>Human Assembly</h2>
+<ul>
+<li>Assemble paired-end/mate-pair with ABySS 2.0</li>
+<li>Correct misassemblies with 10x Chromium</li>
+<li>Assembly locus discordant with both the linked reads and the reference is likely a misassembly</li>
+</ul>
+<p>Requiring 4 clipped molecules<br />
+Tigmint identified 39 breakpoints.<br />
+38 of 39 (97%) discordant with the reference</p>
+<p>Requiring 3 clipped molecules,<br />
+Tigmint identified 184 breakpoints.<br />
+104 of 184 (57%) discordant with the reference</p>
+<p>Requiring 2 clipped molecules,<br />
+Tigmint identified 1995 breakpoints.<br />
+250 of 1995 (12.5%) discordant with the reference</p>
+</section><section id="human-assemblies" class="slide level2">
+<h2>Human Assemblies</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Assembly</th>
+<th>Tigmint breaks</th>
+<th>Discordant breaks</th>
+<th>Breaks before</th>
+<th>Breaks after</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ABySS</td>
+<td>39</td>
+<td>38 (97%)</td>
+<td>2717</td>
+<td>2679</td>
+</tr>
+<tr class="even">
+<td>ABySS + Bionano + ARCS</td>
+<td>78</td>
+<td>14 (18%)</td>
+<td>2757</td>
+<td>2743</td>
+</tr>
+<tr class="odd">
+<td>Supernova</td>
+<td>163</td>
+<td>56 (34%)</td>
+<td>3883</td>
+<td>3827</td>
+</tr>
+</tbody>
+</table>
+<p>Genome in a Bottle HG004</p>
+</section><section id="genome-skimming" class="slide level2">
+<h2>Genome Skimming</h2>
+<p>Assemble the 6 Mbp Sitka spruce mitochondrion</p>
+<ul>
+<li>Whole genome sequencing data contains both nuclear and organellar reads</li>
+<li>Hundreds of mitochondria and plastids per cell</li>
+<li>Reads of the organellar genomes are abundant</li>
+<li>Organellar genomes assemble with a single lane</li>
+<li>Single-copy nuclear sequences are too low depth to assemble well</li>
+</ul>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/picea-glauca-depth-gc.png" alt="White spruce depth vs percent GC" /><figcaption>White spruce depth vs percent GC</figcaption>
+</figure>
+</section><section id="method" class="slide level2">
+<h2>Method</h2>
+<ul>
+<li>Assemble the reads with <a href="https://github.com/bcgsc/abyss">ABySS 2.0</a></li>
+<li>Correct misassemblies with <a href="https://github.com/bcgsc/tigmint">Tigmint</a></li>
+<li>Scaffold with <a href="https://github.com/bcgsc/arcs">ARCS</a> and <a href="https://github.com/warrenlr/LINKS">LINKS</a></li>
+<li>Fill gaps with <a href="https://github.com/bcgsc/abyss/tree/master/Sealer">Sealer</a></li>
+<li>Polish with <a href="http://www.broadinstitute.org/software/pilon/">Pilon</a></li>
+<li>Annotate genes with <a href="http://www.yandell-lab.org/software/maker.html">MAKER</a> and <a href="http://www.vicbioinformatics.com/software.prokka.shtml">Prokka</a></li>
+</ul>
+</section><section id="sitka-spruce-mitochondrion-2" class="slide level2">
+<h2>Sitka Spruce Mitochondrion</h2>
+<ul>
+<li>Assembled organelles from WGSS<br />
+with ABySS 2.0, ARCS, and Tigmint</li>
+<li>6 Mbp mitochondrial genome in 4 scaffolds</li>
+<li>Nine fold improvement in N50</li>
+<li>70% of genome in one 4.2 Mbp scaffold</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Tools</th>
+<th>Scaffolds</th>
+<th>N50</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ABySS + ARCS</td>
+<td>16</td>
+<td>0.46 Mbp</td>
+</tr>
+<tr class="even">
+<td>+ Tigmint</td>
+<td>4</td>
+<td>4.2 Mbp</td>
+</tr>
+</tbody>
+</table>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/scaffold-depth.png" alt="Depth of coverage per scaffold" /><figcaption>Depth of coverage per scaffold</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/picea-sitchensis-mitochondrion.png" alt="Sitka spruce mitochondrion" /><figcaption>Sitka spruce mitochondrion</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<table>
+<thead>
+<tr class="header">
+<th>Read Metrics</th>
+<th>Plastid</th>
+<th>Mitochondrion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number of HiSeq lanes</td>
+<td>1 GemCode lane</td>
+<td>1 Chromium lane</td>
+</tr>
+<tr class="even">
+<td>Read length</td>
+<td>2 x 125 bp</td>
+<td>2 x 150 bp</td>
+</tr>
+<tr class="odd">
+<td>Number of read</td>
+<td>630 million</td>
+<td>843 million</td>
+</tr>
+<tr class="even">
+<td>Number selected for assembly</td>
+<td>4.3 million</td>
+<td>119 million</td>
+</tr>
+<tr class="odd">
+<td>Number mapped to assembly</td>
+<td>15,232 of 4.3 M</td>
+<td>3.78 M of 843 M</td>
+</tr>
+<tr class="even">
+<td>Proportion of organellar reads</td>
+<td>1/283 0.35%</td>
+<td>1/223 or 0.45%</td>
+</tr>
+<tr class="odd">
+<td>Depth of coverage</td>
+<td>17x</td>
+<td>40x</td>
+</tr>
+</tbody>
+</table>
+</section><section class="slide level2">
+
+<table>
+<thead>
+<tr class="header">
+<th>Assembly Metrics</th>
+<th>Plastid</th>
+<th>Mitochondrion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Assembled genome size</td>
+<td>124,029 bp</td>
+<td>6.09 Mbp</td>
+</tr>
+<tr class="even">
+<td>Number of contigs</td>
+<td>1 contig</td>
+<td>1,216 contigs</td>
+</tr>
+<tr class="odd">
+<td>Contig N50</td>
+<td>124 kbp</td>
+<td>13.7 kbp</td>
+</tr>
+<tr class="even">
+<td>Number of scaffolds</td>
+<td>1 scaffold</td>
+<td>239 scaffolds</td>
+</tr>
+<tr class="odd">
+<td>Scaffold N50</td>
+<td>124 kbp</td>
+<td>461 kbp</td>
+</tr>
+<tr class="even">
+<td>Largest scaffold</td>
+<td>124 kbp</td>
+<td>1,223 kbp</td>
+</tr>
+<tr class="odd">
+<td>GC content</td>
+<td>38.8%</td>
+<td>43.6%</td>
+</tr>
+</tbody>
+</table>
+</section><section class="slide level2">
+
+<table>
+<thead>
+<tr class="header">
+<th>Annotation Metrics</th>
+<th>Plastid</th>
+<th>Mitochondrion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number of genes w/o ORFS</td>
+<td>114 (108)</td>
+<td>115 (67)</td>
+</tr>
+<tr class="even">
+<td>Protein-coding genes (mRNA)</td>
+<td>74 (72)</td>
+<td>84 (47)</td>
+</tr>
+<tr class="odd">
+<td>rRNA genes</td>
+<td>4 (4)</td>
+<td>3 (2)</td>
+</tr>
+<tr class="even">
+<td>tRNA genes</td>
+<td>36 (32)</td>
+<td>25 (18)</td>
+</tr>
+<tr class="odd">
+<td>ORFs ≥ 300 bp</td>
+<td>4</td>
+<td>1,154</td>
+</tr>
+<tr class="even">
+<td>Introns in coding genes</td>
+<td>9 (8)</td>
+<td>9 (6)</td>
+</tr>
+<tr class="odd">
+<td>Introns in tRNA genes</td>
+<td>6 (6)</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
